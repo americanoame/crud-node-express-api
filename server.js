@@ -1,17 +1,18 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const Product = require('./models/productModels')
 const app = express();
 
+const PORT = process.env.PORT || 3000
+const MONGO_URL = process.env.MONGO_URL
+
 app.use(express.json())
 
 
 
-// routes
 
-app.get('/blog', (req, res)  => {
-    res.send('hello Node Api')
-})
+// routes
 
 // 2part getting data from the database
 
@@ -91,7 +92,8 @@ app.delete('/products/:id', async(req, res) => {
 })
 
 
-mongoose.connect('mongodb+srv://andrenations:TUNdraLF49UVrbu6@cluster0.rlurztn.mongodb.net/?retryWrites=true&w=majority')
+mongoose
+.connect(MONGO_URL)
 
 .then(() => {
     console.log('connected to db');
@@ -100,11 +102,8 @@ mongoose.connect('mongodb+srv://andrenations:TUNdraLF49UVrbu6@cluster0.rlurztn.m
     console.log(err.massage);
 });
 
-
- 
-
-app.listen(3000, ()=> {
-    console.log('Node Api is running on port 3000')
+app.listen(PORT, ()=> {
+    console.log(`Node Api is running on port ${PORT}`)
 })
 
 
