@@ -27,6 +27,3 @@ mongoose
 app.listen(PORT, ()=> {
     console.log(`Node Api is running on port ${PORT}`)
 })
-
-
-
